@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "IPPO_test",
+            "name": "QMIX_test",
             "type": "debugpy",
             "request": "launch",
-            "program": "/Users/xumingyuan/Documents/repository/UnityMARL/examples/IPPO/unity_env_IPPO.py",
+            "program": "/Users/xumingyuan/Documents/repository/UnityMARL/examples/QMIX/unity_env_QMIX.py",
             "console": "integratedTerminal",
             "justMyCode": false
         }

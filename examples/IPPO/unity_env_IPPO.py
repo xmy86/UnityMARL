@@ -42,9 +42,16 @@ from gym.spaces import Box
 from xuance.environment import RawMultiAgentEnv
 from mlagents_envs.environment import UnityEnvironment
 from mlagents_envs.envs.unity_parallel_env import UnityParallelEnv
+import argparse
+from xuance.common import get_configs
+from xuance.environment import REGISTRY_MULTI_AGENT_ENV
+from xuance.environment import make_envs
+from xuance.torch.agents import IPPO_Agents
 
 # Configuration that needs to be adjusted
 config_env_path = "examples/IPPO/IPPO_config.yaml"
+configs_dict = get_configs(file_dir=config_env_path)
+configs = argparse.Namespace(**configs_dict)
 max_episode_steps = 200
 worker_id_counter = itertools.count(start=0)
 
@@ -125,19 +132,9 @@ class UnityMultiAgentEnv(RawMultiAgentEnv):
     def avail_actions(self): #
         """Returns a boolean mask indicating which actions are available for each agent."""
         return None
-    
-import argparse
-from xuance.common import get_configs
-configs_dict = get_configs(file_dir=config_env_path)
-configs = argparse.Namespace(**configs_dict)
-
-from xuance.environment import REGISTRY_MULTI_AGENT_ENV
-REGISTRY_MULTI_AGENT_ENV[configs.env_name] = UnityMultiAgentEnv # configs.env_name: "MyNewMultiAgentEnv"
-
-from xuance.environment import make_envs
-from xuance.torch.agents import IPPO_Agents
 
 if __name__ == "__main__":
+    REGISTRY_MULTI_AGENT_ENV[configs.env_name] = UnityMultiAgentEnv # configs.env_name: "MyNewMultiAgentEnv"
     envs = make_envs(configs)  # Make parallel environments.
     Agent = IPPO_Agents(config=configs, envs=envs)  # Create a DDPG agent from XuanCe.
     Agent.train(configs.running_steps // configs.parallels)  # Train the model for numerous steps.
