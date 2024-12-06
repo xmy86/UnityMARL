@@ -1,6 +1,10 @@
 # /site-packages/mlagents_envs/envs/unity_pettingzoo_base_env.py 
 # 135 int32 -> float32
 
+# \site-packages\mlagents_envs\side_channel\side_channel_manager.py
+# 45-48 delete
+
+"""
 # /site-packages/xuance/environment/vector_envs
 # /dummy/dummy_vec_maenv.py
 # 27 [np.zeros(space2shape(self.state_space)) for _ in range(self.num_envs)] 
@@ -15,6 +19,7 @@
 
 # /site-packages/xuance/torch/learners/multi_agent_rl/qmix_learner.py
 # 27 self.policy.action_space[k].n -> self.policy.action_space[k].shape[0]
+"""
 
 import itertools
 import numpy as np
@@ -75,7 +80,7 @@ class UnityMultiAgentEnv(RawMultiAgentEnv):
 
     def render(self, *args):
         """Get the rendered images of the environment."""
-        return self.env.render()
+        return self.env.render(*args)
 
     def reset(self):
         """Reset the environment to its initial state."""
