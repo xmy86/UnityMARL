@@ -8,7 +8,7 @@ In **uniy_wrapper** shows how to use mlagents-env to wrap Unity programs into Py
 **xuance_toturial** shows how to run the xuance deep reinforcement learning algorithm package and run the algorithm in a customized environment.<br>
 
 ## Installation
-**Step 1**: Create a new conda environment (python>=3.7 is suggested):
+**Step 1**: Create a new conda environment (python=3.10 is suggested):
 ```commandline
 conda create -n UnityMARL python==3.10.12
 ```
